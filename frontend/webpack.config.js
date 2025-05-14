@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.js",
+  entry: "./src/index.jsx",
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
@@ -19,20 +19,19 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Development',
+      template: "public/index.html"
     }),
   ],
   module: {
     rules: [
       {
-        test: /\.(?:js|mjs|cjs)$/,
+        test: /\.(?:js|mjs|cjs|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             targets: "defaults",
-            presets: [
-              ['@babel/preset-env']
-            ]
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           }
         }
       }
